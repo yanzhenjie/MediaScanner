@@ -1,0 +1,15 @@
+.gradle/
+build/
+local.properties
+proguard/
+*.log
+.navigation/
+captures/
+*.iml
+*.jks
+.externalNativeBuild
+google-services.json
+freeline.py
+freeline/
+freeline_project_description.json
+/.idea/

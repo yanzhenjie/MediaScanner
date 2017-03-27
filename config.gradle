@@ -1,0 +1,27 @@
+ext {
+    plugins = [
+            library    : 'com.android.library',
+            application: 'com.android.application',
+            maven      : 'com.github.dcendents.android-maven',
+            bintray    : 'com.jfrog.bintray'
+    ]
+
+    android = [
+            applicationId    : "com.yanzhenjie.mediascanner.sample",
+            compileSdkVersion: 25,
+            buildToolsVersion: "25.0.2",
+
+            minSdkVersion    : 11,
+            targetSdkVersion : 23,
+
+            versionCode      : 10,
+            versionName      : "1.0",
+
+            jackOptions      : true
+    ]
+
+    dependencies = [
+            design      : 'com.android.support:design:25.3.0',
+            appcompat   : 'com.android.support:appcompat-v7:25.3.0',
+    ]
+}

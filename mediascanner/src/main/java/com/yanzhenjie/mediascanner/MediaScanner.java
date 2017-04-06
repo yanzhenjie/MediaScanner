@@ -49,7 +49,7 @@ public class MediaScanner implements MediaScannerConnection.MediaScannerConnecti
      * @param scannerListener {@link ScannerListener}.
      */
     public MediaScanner(Context context, ScannerListener scannerListener) {
-        this.mMediaScanConn = new MediaScannerConnection(context, this);
+        this.mMediaScanConn = new MediaScannerConnection(context.getApplicationContext(), this);
         this.mScannerListener = scannerListener;
     }
 

@@ -23,8 +23,8 @@ android {
 }
 
 dependencies {
-    compile project(':mediascanner')
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile rootProject.ext.dependencies.mediascanner
     compile rootProject.ext.dependencies.appcompat
     compile rootProject.ext.dependencies.design
 }

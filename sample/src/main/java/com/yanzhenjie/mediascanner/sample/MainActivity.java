@@ -49,8 +49,6 @@ public class MainActivity extends AppCompatActivity {
      * Scan image.
      */
     private void scan() {
-        MediaScanner mediaScanner = new MediaScanner(this, mListener);
-
         File root = Environment.getExternalStorageDirectory();
 
         List<String> filePaths = new ArrayList<>();
@@ -59,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
             filePaths.add(file1);
         }
 
+        // Usage:
+        MediaScanner mediaScanner = new MediaScanner(this, mListener);
         mediaScanner.scan(filePaths);
     }
 

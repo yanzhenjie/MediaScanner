@@ -21,6 +21,7 @@ ext {
     ]
 
     dependencies = [
+            mediascanner: 'com.yanzhenjie:mediascanner:1.0.1',
             design      : 'com.android.support:design:25.3.0',
             appcompat   : 'com.android.support:appcompat-v7:25.3.0',
     ]

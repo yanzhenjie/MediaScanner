@@ -9,7 +9,7 @@ Author URL: [http://www.yanzhenjie.com](http://www.yanzhenjie.com)
 # Dependencies
 * Gradle
 ```groovy
-compile 'com.yanzhenjie:mediascanner:1.0.0'
+compile 'com.yanzhenjie:mediascanner:1.0.1'
 ```
 
 * Maven
@@ -17,7 +17,7 @@ compile 'com.yanzhenjie:mediascanner:1.0.0'
 <dependency>
   <groupId>com.yanzhenjie</groupId>
   <artifactId>mediascanner</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <type>pom</type>
 </dependency>
 ```

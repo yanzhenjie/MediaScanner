@@ -20,9 +20,40 @@ ext {
             jackOptions      : true
     ]
 
+    maven = [
+            // library
+            version       : "1.0.2",
+
+            siteUrl       : 'https://github.com/yanzhenjie/MediaScanner',
+            gitUrl        : 'git@github.com:yanzhenjie/MediaScanner.git',
+
+            group         : "com.yanzhenjie",
+
+            // project
+            packaging     : 'aar',
+            name          : 'MediaScanner',
+            description   : 'MediaScanner for android',
+
+            // project.license
+            licenseName   : 'The Apache Software License, Version 2.0',
+            licenseUrl    : 'http://www.apache.org/licenses/LICENSE-2.0.txt',
+
+            // project.developers
+            developerId   : 'yanzhenjie',
+            developerName : 'yanzhenjie',
+            developerEmail: 'smallajax@foxmail.com',
+
+            // bintray
+            // name
+            binrayLibrary : "mediascanner",
+            bintrayRepo   : "maven",
+            bintrayUser   : 'yolanda',
+            bintrayLicense: "Apache-2.0"
+    ]
+
     dependencies = [
-            mediascanner: 'com.yanzhenjie:mediascanner:1.0.1',
-            design      : 'com.android.support:design:25.3.0',
-            appcompat   : 'com.android.support:appcompat-v7:25.3.0',
+            mediascanner: 'com.yanzhenjie:mediascanner:1.0.2',
+            design      : 'com.android.support:design:25.3.1',
+            appcompat   : 'com.android.support:appcompat-v7:25.3.1'
     ]
 }

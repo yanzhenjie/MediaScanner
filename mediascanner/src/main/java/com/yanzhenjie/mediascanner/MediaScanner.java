@@ -106,6 +106,7 @@ public class MediaScanner implements MediaScannerConnection.MediaScannerConnecti
         scanCount++;
         if (scanCount == filePaths.length) {
             mMediaScanConn.disconnect();
+            scanCount = 0;
             if (mScannerListener != null) mScannerListener.allComplete(filePaths);
         }
     }

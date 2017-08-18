@@ -15,17 +15,14 @@
  */
 package com.yanzhenjie.mediascanner.sample;
 
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.yanzhenjie.mediascanner.MediaScanner;
-import com.yanzhenjie.mediascanner.ScannerListener;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,36 +39,31 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        findViewById(R.id.btn_test).setOnClickListener(v -> scan());
+        findViewById(R.id.btn_test).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                scan();
+            }
+        });
     }
 
     /**
      * Scan image.
      */
     private void scan() {
-        File root = Environment.getExternalStorageDirectory();
+        // Create Scanner.
+        MediaScanner mediaScanner = new MediaScanner(this);
 
-        List<String> filePaths = new ArrayList<>();
-        for (int i = 0; i < 1000; i++) {
-            String file1 = new File(root, "NoHttpSample/image1.jpg").getAbsolutePath();
-            filePaths.add(file1);
-        }
+        // List:
+        List<String> filePathList = new ArrayList<>();
+        mediaScanner.scan(filePathList);
 
-        // Usage:
-        MediaScanner mediaScanner = new MediaScanner(this, mListener);
-        mediaScanner.scan(filePaths);
+        // Array:
+        String[] filePathArray = new String[0];
+        mediaScanner.scan(filePathArray);
+
+        // Single:
+//        String path = ...;
+//        mediaScanner.scan(path);
     }
-
-    /**
-     * Scanner listener.
-     */
-    private ScannerListener mListener = new ScannerListener() {
-        @Override
-        public void oneComplete(String path, Uri uri) {
-        }
-
-        @Override
-        public void allComplete(String[] filePaths) {
-        }
-    };
 }

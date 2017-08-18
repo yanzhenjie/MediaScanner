@@ -20,7 +20,10 @@ import android.net.Uri;
 /**
  * <p>Scanner Listener.</p>
  * Created by YanZhenjie on 17-3-27.
+ *
+ * @deprecated not use.
  */
+@Deprecated
 public interface ScannerListener {
 
     void oneComplete(String path, Uri uri);

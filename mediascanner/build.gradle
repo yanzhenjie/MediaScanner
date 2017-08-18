@@ -10,4 +10,4 @@ android {
     }
 }
 
-apply from: "../maven.gradle"
+apply from: "https://github.com/yanzhenjie/bintray/blob/master/maven-auto.gradle?raw=true"

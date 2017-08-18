@@ -20,6 +20,7 @@ import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.webkit.MimeTypeMap;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -30,8 +31,10 @@ public class MediaScanner implements MediaScannerConnection.MediaScannerConnecti
 
     private MediaScannerConnection mMediaScanConn;
     private ScannerListener mScannerListener;
-    private String[] filePaths;
-    private int scanCount = 0;
+
+    private LinkedList<String[]> mLinkedList = new LinkedList<>();
+    private String[] mCurrentScanPaths;
+    private int mScanCount = 0;
 
     /**
      * Create scanner.
@@ -39,7 +42,7 @@ public class MediaScanner implements MediaScannerConnection.MediaScannerConnecti
      * @param context context.
      */
     public MediaScanner(Context context) {
-        this(context, null);
+        this.mMediaScanConn = new MediaScannerConnection(context.getApplicationContext(), this);
     }
 
     /**
@@ -47,9 +50,11 @@ public class MediaScanner implements MediaScannerConnection.MediaScannerConnecti
      *
      * @param context         context.
      * @param scannerListener {@link ScannerListener}.
+     * @deprecated use {@link #MediaScanner(Context)} instead.
      */
+    @Deprecated
     public MediaScanner(Context context, ScannerListener scannerListener) {
-        this.mMediaScanConn = new MediaScannerConnection(context.getApplicationContext(), this);
+        this(context);
         this.mScannerListener = scannerListener;
     }
 
@@ -86,14 +91,25 @@ public class MediaScanner implements MediaScannerConnection.MediaScannerConnecti
      * @param filePaths file absolute path array.
      */
     public void scan(String[] filePaths) {
-        if (isRunning()) throw new RuntimeException("The scanner is running.");
-        this.filePaths = filePaths;
-        mMediaScanConn.connect();
+        if (filePaths != null && filePaths.length > 0) {
+            this.mLinkedList.add(filePaths);
+            executeOnce();
+        }
+    }
+
+    /**
+     * Execute scanner.
+     */
+    private void executeOnce() {
+        if (!isRunning() && mLinkedList.size() > 0) {
+            this.mCurrentScanPaths = mLinkedList.remove(0);
+            this.mMediaScanConn.connect();
+        }
     }
 
     @Override
     public void onMediaScannerConnected() {
-        if (filePaths != null && filePaths.length > 0) for (String filePath : filePaths) {
+        for (String filePath : mCurrentScanPaths) {
             String extension = MimeTypeMap.getFileExtensionFromUrl(filePath);
             String mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
             mMediaScanConn.scanFile(filePath, mimeType);
@@ -103,11 +119,13 @@ public class MediaScanner implements MediaScannerConnection.MediaScannerConnecti
     @Override
     public void onScanCompleted(String path, Uri uri) {
         if (mScannerListener != null) mScannerListener.oneComplete(path, uri);
-        scanCount++;
-        if (scanCount == filePaths.length) {
+        mScanCount += 1;
+        if (mScanCount == mCurrentScanPaths.length) {
             mMediaScanConn.disconnect();
-            scanCount = 0;
-            if (mScannerListener != null) mScannerListener.allComplete(filePaths);
+            if (mScannerListener != null) mScannerListener.allComplete(mCurrentScanPaths);
+            mScanCount = 0;
+            mCurrentScanPaths = null;
+            executeOnce();
         }
     }
 }

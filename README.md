@@ -9,7 +9,7 @@ Author URL: [http://www.yanzhenjie.com](http://www.yanzhenjie.com)
 # Dependencies
 * Gradle
 ```groovy
-compile 'com.yanzhenjie:mediascanner:1.0.2'
+compile 'com.yanzhenjie:mediascanner:1.0.3'
 ```
 
 * Maven
@@ -17,7 +17,7 @@ compile 'com.yanzhenjie:mediascanner:1.0.2'
 <dependency>
   <groupId>com.yanzhenjie</groupId>
   <artifactId>mediascanner</artifactId>
-  <version>1.0.2</version>
+  <version>1.0.3</version>
   <type>pom</type>
 </dependency>
 ```
@@ -30,49 +30,22 @@ MediaScanner mediaScanner = new MediaScanner(this);
 ...
 ```
 
-## Create Scanner, need callback
-```java
-// if need callback.
-ScannerListener listener = new ScannerListener() {
-    @Override
-    public void oneComplete(String path, Uri uri) {
-        // A file is scanned.
-    }
-
-    @Override
-    public void allComplete(String[] filePaths) {
-        // All file is scanned.
-    }
-}
-MediaScanner mediaScanner = new MediaScanner(this, listener);
-...
-```
-
 ## Scan file path
 ```
-if(!mediaScanner.isRunning()) {
-    String filePath = ...
-    mediaScanner.scan(filePath);
-}
-...
+String filePath = ...
+mediaScanner.scan(filePath);
 ```
 
 ## Scan file path array
 ```java
-if(!mediaScanner.isRunning()) {
-    String[] fileArray = ...
-    mediaScanner.scan(fileArray);
-}
-...
+String[] fileArray = ...
+mediaScanner.scan(fileArray);
 ```
 
 ## Scan file path list
 ```
-if(!mediaScanner.isRunning()) {
-    String fileList = ...
-    mediaScanner.scan(fileList);
-}
-...
+String fileList = ...
+mediaScanner.scan(fileList);
 ```
 
 **欢迎中国开发者关注作者微信公众号**  
